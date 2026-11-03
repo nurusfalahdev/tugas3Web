@@ -6,9 +6,16 @@
         <h3 class="fw-bold mb-1 mt-5">Data Bahan Ajar</h3>
         <p class="text-muted mb-0">Kelola data inventaris bahan ajar Universitas Terbuka</p>
       </div>
+<<<<<<< HEAD
       <!-- btn add data -->
       <div class="col-md-4 text-md-end mt-3 mt-md-0 d-flex flex-wrap gap-2">
         <button class="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#addData" @click="add">
+=======
+
+      -
+      <div class="col-md-4 text-md-end mt-3 mt-md-0 d-flex flex-wrap gap-2">
+        <button class="btn-solid theme-primary" commandfor="invokerDialog" command="show-modal">
+>>>>>>> origin/main
           <i class="bi bi-plus-circle me-2"></i>
           Tambah Data
         </button>
@@ -29,16 +36,28 @@
           </select>
         </div>
 
+<<<<<<< HEAD
         <button class="btn-solid theme-secondary" @click="
           cari = '';
         Kategori = '';
         upbjj = '';
         ">
+=======
+        <button
+          class="btn-solid theme-secondary"
+          @click="
+            cari = '';
+            Kategori = '';
+            upbjj = '';
+          "
+        >
+>>>>>>> origin/main
           <i class="bi bi-arrow-counterclockwise me-1"></i>
           Reset
         </button>
       </div>
     </div>
+<<<<<<< HEAD
     <!-- dialog -->
     <div class="dialog">
       <!-- modal dialog add data -->
@@ -140,6 +159,38 @@
         </div>
       </dialog>
     </div>
+=======
+
+    <!-- modal dialog -->
+    <dialog class="dialog" id="invokerDialog">
+      <div class="dialog-header">
+        <h1 class="dialog-title">Invoker Commands</h1>
+        <button
+          type="button"
+          class="btn-close"
+          commandfor="invokerDialog"
+          command="close"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="dialog-body">
+        <p>
+          This dialog opens with <code>command="show-modal"</code> and closes with
+          <code>command="close"</code>. No Bootstrap JavaScript is involved.
+        </p>
+      </div>
+      <div class="dialog-footer">
+        <button
+          type="button"
+          class="btn-solid theme-secondary"
+          commandfor="invokerDialog"
+          command="close"
+        >
+          Close
+        </button>
+      </div>
+    </dialog>
+>>>>>>> origin/main
 
     <!-- Tabel Bahan Ajar -->
     <div class="card border-0 shadow-sm">
@@ -156,7 +207,16 @@
               <span class="input-group-text bg-white">
                 <i class="bi bi-search"></i>
               </span>
+<<<<<<< HEAD
               <input v-model="cari" type="text" class="form-control" placeholder="Cari kode atau judul bahan ajar..." />
+=======
+              <input
+                v-model="cari"
+                type="text"
+                class="form-control"
+                placeholder="Cari kode atau judul bahan ajar..."
+              />
+>>>>>>> origin/main
             </div>
           </div>
         </div>
@@ -196,17 +256,25 @@
                 <td>{{ item.harga }}</td>
                 <td class="text-center">{{ item.qty }}</td>
                 <td class="text-center">{{ item.safety }}</td>
+<<<<<<< HEAD
                 <td>
                   <span v-html="item.catatanHTML"></span>
                 </td>
+=======
+                <td>{{ item.catatanHTML }}</td>
+>>>>>>> origin/main
                 <td>
                   <span class="badge text-bg-success">
                     <i class="bi bi-check-circle me-1"></i>
                   </span>
                 </td>
                 <td>
+<<<<<<< HEAD
                   <button class="btn-solid theme-warning" data-bs-toggle="dialog" data-bs-target="#editData"
                     @click="editdata(item)">Edit</button>
+=======
+                  <button class="btn-solid theme-warning">Edit</button>
+>>>>>>> origin/main
                 </td>
               </tr>
 
@@ -220,6 +288,40 @@
           </table>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+
+      <!-- Card Footer -->
+      <div class="card-footer bg-white py-3">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <small class="text-muted"> Menampilkan 2 dari 120 data </small>
+          </div>
+
+          <div class="col-md-6">
+            <nav class="d-flex justify-content-md-end mt-2 mt-md-0">
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#"> Previous </a>
+                </li>
+
+                <li class="page-item active">
+                  <a class="page-link" href="#">1</a>
+                </li>
+
+                <li class="page-item">
+                  <a class="page-link" href="#">2</a>
+                </li>
+
+                <li class="page-item">
+                  <a class="page-link" href="#"> Next </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+>>>>>>> origin/main
     </div>
   </div>
 </template>
@@ -248,6 +350,7 @@ const stok = computed(() => {
     return cocok && cocokkategori && cocokUpbjj
   })
 })
+<<<<<<< HEAD
 
 
 // =========editdata================
@@ -286,4 +389,6 @@ function simpanEdit() {
 
 }
 
+=======
+>>>>>>> origin/main
 </script>
