@@ -9,12 +9,7 @@
 
       <!-- Tombol dan filter -->
       <div class="col-md-4 text-md-end mt-3 mt-md-0 d-flex flex-wrap gap-2">
-        <button
-          class="btn-solid theme-primary"
-          data-bs-toggle="dialog"
-          data-bs-target="#addData"
-          @click="add"
-        >
+        <button class="btn-solid theme-primary" data-bs-toggle="dialog" data-bs-target="#addData" @click="add">
           <i class="bi bi-plus-circle me-2"></i>
           Tambah Data
         </button>
@@ -37,14 +32,11 @@
           </select>
         </div>
 
-        <button
-          class="btn-solid theme-secondary"
-          @click="
-            cari = '';
-            Kategori = '';
-            upbjj = '';
-          "
-        >
+        <button class="btn-solid theme-secondary" @click="
+          cari = '';
+        Kategori = '';
+        upbjj = '';
+        ">
           <i class="bi bi-arrow-counterclockwise me-1"></i>
           Reset
         </button>
@@ -52,7 +44,7 @@
     </div>
 
     <!-- Dialog tambah dan edit data -->
-    <div class="dialog">
+    <div class="modal">
       <dialog class="dialog" id="addData">
         <div class="dialog-header">
           <h1 class="dialog-title">
@@ -65,33 +57,46 @@
         <div class="dialog-body">
           <div class="row grid grid-cols-2">
             <div class="kode col-md-6">
-              <input type="text" class="form-control" id="kode" placeholder="Masukan Kode Matkul">
+              <input type="text" class="form-control" id="kode" placeholder="Masukan Kode Matkul"
+                v-model="formTambah.kode">
             </div>
             <div class="judul col-md-6">
-              <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Matkul">
+              <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Matkul"
+                v-model="formTambah.judul">
             </div>
             <div class="kategori col-md-6">
-              <input type="text" class="form-control" id="kategori" placeholder="Masukan Kategori Matkul">
+              <select name="kategori" id="kategori" class="form-control">
+                <option value="">Kategori</option>
+                <option v-for="kategori in data.kategoriList" :value="kategori">{{ kategori }}</option>
+              </select>
             </div>
             <div class="upbjj col-md-6">
-              <input type="text" class="form-control" id="upbjj" placeholder="Masukan UPBJJ Matkul">
+              <select name="upbjj" id="upbjj" class="form-control">
+                <option value="">Upbjj</option>
+                <option :value="upbjj" v-for="upbjj in data.upbjjList">{{ upbjj }}</option>
+              </select>
             </div>
             <div class="lokasiRak col-md-6">
-              <input type="text" class="form-control" id="lokasiRak" placeholder="Masukan Lokasi Rak">
+              <input type="text" class="form-control" id="lokasiRak" placeholder="Masukan Lokasi Rak"
+                v-model="formTambah.lokasiRak">
             </div>
             <div class="harga col-md-6">
-              <input type="text" class="form-control" id="harga" placeholder="Masukan Harga Matkul">
+              <input type="text" class="form-control" id="harga" placeholder="Masukan Harga Matkul"
+                v-model="formTambah.harga">
             </div>
             <div class="qty col-md-6">
-              <input type="text" class="form-control" id="qty" placeholder="Masukan Qty Matkul">
+              <input type="text" class="form-control" id="qty" placeholder="Masukan Qty Matkul"
+                v-model="formTambah.qty">
             </div>
             <div class="safety col-md-6">
-              <input type="text" class="form-control" id="safety" placeholder="Masukan Safety Stock">
+              <input type="text" class="form-control" id="safety" placeholder="Masukan Safety Stock"
+                v-model="formTambah.safety">
             </div>
           </div>
 
           <div class="catatan col-md-6 mt-5">
-            <textarea class="form-control" id="catatan" placeholder="Masukan Catatan"></textarea>
+            <textarea class="form-control" id="catatan" placeholder="Masukan Catatan"
+              v-model="formTambah.catatanHTML"></textarea>
           </div>
         </div>
 
@@ -110,33 +115,46 @@
         <div class="dialog-body">
           <div class="row grid grid-cols-2">
             <div class="kode col-md-6">
-              <input type="text" class="form-control" id="editKode" placeholder="Masukan Kode Matkul" v-model="dataEdit.kode">
+              <input type="text" class="form-control" id="editKode" placeholder="Masukan Kode Matkul"
+                v-model="dataEdit.kode">
             </div>
             <div class="judul col-md-6">
-              <input type="text" class="form-control" id="editJudul" placeholder="Masukan Judul Matkul" v-model="dataEdit.judul">
+              <input type="text" class="form-control" id="editJudul" placeholder="Masukan Judul Matkul"
+                v-model="dataEdit.judul">
             </div>
             <div class="kategori col-md-6">
-              <input type="text" class="form-control" id="editKategori" placeholder="Masukan Kategori Matkul" v-model="dataEdit.kategori">
+              <select name="kategori" id="kategori" class="form-control">
+                <option value="">Kategori</option>
+                <option v-for="kategori in data.kategoriList" :value="kategori">{{ kategori }}</option>
+              </select>
             </div>
             <div class="upbjj col-md-6">
-              <input type="text" class="form-control" id="editUpbjj" placeholder="Masukan UPBJJ Matkul" v-model="dataEdit.upbjj">
+              <select name="upbjj" id="upbjj" class="form-control">
+                <option value="">Upbjj</option>
+                <option v-for="upbjj in data.upbjjList" :value="upbjj">{{ upbjj }}</option>
+              </select>
             </div>
             <div class="lokasiRak col-md-6">
-              <input type="text" class="form-control" id="editLokasiRak" placeholder="Masukan Lokasi Rak" v-model="dataEdit.lokasiRak">
+              <input type="text" class="form-control" id="editLokasiRak" placeholder="Masukan Lokasi Rak"
+                v-model="dataEdit.lokasiRak">
             </div>
             <div class="harga col-md-6">
-              <input type="text" class="form-control" id="editHarga" placeholder="Masukan Harga Matkul" v-model="dataEdit.harga">
+              <input type="text" class="form-control" id="editHarga" placeholder="Masukan Harga Matkul"
+                v-model="dataEdit.harga">
             </div>
             <div class="qty col-md-6">
-              <input type="text" class="form-control" id="editQty" placeholder="Masukan Qty Matkul" v-model="dataEdit.qty">
+              <input type="text" class="form-control" id="editQty" placeholder="Masukan Qty Matkul"
+                v-model="dataEdit.qty">
             </div>
             <div class="safety col-md-6">
-              <input type="text" class="form-control" id="editSafety" placeholder="Masukan Safety Stock" v-model="dataEdit.safety">
+              <input type="text" class="form-control" id="editSafety" placeholder="Masukan Safety Stock"
+                v-model="dataEdit.safety">
             </div>
           </div>
 
           <div class="catatan col-md-6 mt-5">
-            <textarea class="form-control" id="editCatatan" placeholder="Masukan Catatan" v-model="dataEdit.catatanHTML"></textarea>
+            <textarea class="form-control" id="editCatatan" placeholder="Masukan Catatan"
+              v-model="dataEdit.catatanHTML"></textarea>
           </div>
         </div>
 
@@ -161,12 +179,7 @@
               <span class="input-group-text bg-white">
                 <i class="bi bi-search"></i>
               </span>
-              <input
-                v-model="cari"
-                type="text"
-                class="form-control"
-                placeholder="Cari kode atau judul bahan ajar..."
-              >
+              <input v-model="cari" type="text" class="form-control" placeholder="Cari kode atau judul bahan ajar...">
             </div>
           </div>
         </div>
@@ -212,12 +225,8 @@
                   </span>
                 </td>
                 <td>
-                  <button
-                    class="btn-solid theme-warning"
-                    data-bs-toggle="dialog"
-                    data-bs-target="#editData"
-                    @click="editdata(item)"
-                  >
+                  <button class="btn-solid theme-warning" data-bs-toggle="dialog" data-bs-target="#editData"
+                    @click="editdata(item)">
                     Edit
                   </button>
                 </td>
@@ -233,31 +242,16 @@
           </table>
         </div>
       </div>
-
-      <div class="card-footer bg-white py-3">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <small class="text-muted">Menampilkan {{ stok.length }} data</small>
-          </div>
-          <div class="col-md-6">
-            <nav class="d-flex justify-content-md-end mt-2 mt-md-0">
-              <ul class="pagination pagination-sm mb-0">
-                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import data from '../dataBahanAjar.json'
+import dataAwal from '../dataBahanAjar.json'
 import { ref, computed } from 'vue'
+
+
+const data = ref(dataAwal);
 
 const Kategori = ref('')
 const cari = ref('')
@@ -266,7 +260,7 @@ const dataEdit = ref(null)
 const kodeAsli = ref('')
 
 const stok = computed(() => {
-  return data.stok.filter((item) => {
+  return data.value.stok.filter((item) => {
     const kata = cari.value.toLowerCase()
     const cocokKode = String(item.kode ?? '').toLowerCase().includes(kata)
     const cocokJudul = String(item.judul ?? '').toLowerCase().includes(kata)
@@ -285,7 +279,9 @@ function editdata(item) {
 function simpanEdit() {
   if (!dataEdit.value) return
 
-  const index = data.stok.findIndex((item) => item.kode === kodeAsli.value)
+  const index = data.value.stok.findIndex(
+    (item) => item.kode === kodeAsli.value
+  )
 
   if (index === -1) {
     Swal.fire({
@@ -296,7 +292,8 @@ function simpanEdit() {
     return
   }
 
-  Object.assign(data.stok[index], dataEdit.value)
+  Object.assign(data.value.stok[index], dataEdit.value)
+
   dataEdit.value = null
   kodeAsli.value = ''
 
@@ -305,5 +302,83 @@ function simpanEdit() {
     text: 'Data berhasil diperbarui!',
     icon: 'success'
   })
+}
+
+
+const formTambah = ref({
+  kode: '',
+  judul: '',
+  kategori: '',
+  upbjj: '',
+  lokasiRak: '',
+  harga: '',
+  qty: '',
+  safety: '',
+  catatanHTML: ''
+});
+
+
+function addData() {
+  // validasi
+  if (!formTambah.value.kode.trim() || !formTambah.value.judul.trim()) {
+    Swal.fire({
+      title: 'Gagal!',
+      text: 'Harap lengkapi data!',
+      icon: 'warning'
+    });
+    return;
+  }
+
+  // apakah kode sdh di gunakan
+  const kodeAda = data.value.stok.some((item) => item.kode.toLowerCase() === formTambah.value.kode.trim());
+
+  if (kodeAda) {
+    Swal.fire({
+      title: "Kode sudah digunakan!",
+      text: "Silakan gunakan kode bahan ajar yang berbeda.",
+      icon: "error",
+    });
+    return;
+  }
+
+
+  // data masuk ke arrays
+  data.value.stok.push({
+    ...formTambah.value,
+    kode: formTambah.value.kode.trim(),
+    judul: formTambah.value.judul.trim(),
+    kategori: formTambah.value.kategori.trim(),
+    upbjj: formTambah.value.upbjj.trim(),
+    lokasiRak: formTambah.value.lokasiRak.trim(),
+    harga: formTambah.value.harga.trim(),
+    qty: formTambah.value.qty.trim(),
+    safety: formTambah.value.safety.trim(),
+    catatanHTML: formTambah.value.catatanHTML.trim(),
+  });
+
+  // TUTUP MODAL
+  const modalElement = document.getElementById("addData");
+
+  if (modalElement.open) {
+    modalElement.close()
+  }
+
+  formTambah.value = {
+    kode: "",
+    judul: "",
+    kategori: "",
+    upbjj: "",
+    lokasiRak: "",
+    harga: 0,
+    qty: 0,
+    safety: 0,
+    catatanHTML: "",
+  };
+
+  Swal.fire({
+    title: "Berhasil!",
+    text: "Data bahan ajar berhasil ditambahkan.",
+    icon: "success",
+  });
 }
 </script>
